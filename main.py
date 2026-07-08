@@ -1,9 +1,10 @@
 from modules.speech import listen
 from modules.speak import speak
-from modules.browser import open_google, open_youtube
-import time
+from modules.commands import process_command
 
 print("===== VEXORA STARTED =====")
+
+awake = False
 
 while True:
 
@@ -12,47 +13,33 @@ while True:
     if query is None:
         continue
 
+    query = query.lower()
+
     print("You said:", query)
 
-    if "hello" in query:
+    # Wake VEXORA
+    if not awake:
 
-        speak("Hello Dev. I am vexora, How can I help you today?")
+        if "hello" in query:
 
-        command = listen()
+            awake = True
+            speak("Hello Dev. I am Vexora. How can I help you today?")
 
-        if command is None:
-            continue
+        elif "exit" in query:
 
-        command = command.lower()
-
-        print(repr(command))
-
-        if "google" in command:
-
-            speak("Opening Google")
-            time.sleep(1)
-            open_google()
-            speak("Google has been opened.")
-
-        elif "youtube" in command:
-
-            speak("Opening YouTube")
-            time.sleep(1)
-            open_youtube()
-            speak("youtube is ready.")
-
-        elif "exit" in command:
-
-            speak("Goodbye Dev. Have a nice day")
-
+            speak("Goodbye Dev.")
             break
 
         else:
 
-            speak("Sorry Dev. I don't know that command.")
+            print("Wake word not detected.")
 
-    elif "exit" in query:
+    # Conversation Mode
+    else:
 
-        speak("Goodbye Dev.")
+        if "exit" in query:
 
-        break
+            speak("Goodbye Dev.")
+            break
+
+        process_command(query)
