@@ -1,16 +1,12 @@
-# Python cache
+# Python
 __pycache__/
 *.pyc
 
-# Virtual environment
+# Virtual Environment
 venv/
 
-# Temporary files
+# Logs
+logs/*.log
+
+# Voice
 voice.mp3
-
-# VS Code
-.vscode/
-
-# OS files
-.DS_Store
-Thumbs.db

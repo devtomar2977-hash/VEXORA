@@ -17,29 +17,42 @@ while True:
 
     print("You said:", query)
 
-    # Wake VEXORA
+    from modules.logger import log_command
+
+    log_command(query)
+
     if not awake:
 
         if "hello" in query:
 
             awake = True
+
             speak("Hello Dev. I am Vexora. How can I help you today?")
 
         elif "exit" in query:
 
             speak("Goodbye Dev.")
+
             break
 
         else:
 
             print("Wake word not detected.")
 
-    # Conversation Mode
     else:
 
-        if "exit" in query:
+        if "sleep" in query:
+
+            speak("Going to sleep. Say Hello when you need me.")
+
+            awake = False
+
+        elif "exit" in query:
 
             speak("Goodbye Dev.")
+
             break
 
-        process_command(query)
+        else:
+
+            process_command(query)
