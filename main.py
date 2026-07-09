@@ -1,8 +1,11 @@
-from modules.speech import listen
+from modules.speech import listen, setup_microphone
 from modules.speak import speak
-from modules.commands import process_command
+from modules.logger import log_command
+from modules.brain import process_query
 
 print("===== VEXORA STARTED =====")
+
+setup_microphone()
 
 awake = False
 
@@ -17,22 +20,18 @@ while True:
 
     print("You said:", query)
 
-    from modules.logger import log_command
-
     log_command(query)
 
     if not awake:
 
-        if "hello" in query:
+        if query.startswith("hello"):
 
             awake = True
-
             speak("Hello Dev. I am Vexora. How can I help you today?")
 
         elif "exit" in query:
 
             speak("Goodbye Dev.")
-
             break
 
         else:
@@ -44,27 +43,13 @@ while True:
         if "sleep" in query:
 
             speak("Going to sleep. Say Hello when you need me.")
-
             awake = False
 
         elif "exit" in query:
-
+            print("DEBUG: Sleep command detected")
             speak("Goodbye Dev.")
-
             break
 
         else:
 
-            from modules.brain import process_query
-
-            process_query(query)
-
-<<<<<<< HEAD
-        from modules.brain import process_query
-
-        process_query(query)
-=======
-        else:
-
-            process_command(query)
->>>>>>> main
+            process_query(query)    

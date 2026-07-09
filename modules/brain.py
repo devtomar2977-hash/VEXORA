@@ -1,11 +1,11 @@
 from modules.commands import process_command
+from modules.ai import ask_ai
 
 
 def process_query(query):
 
     query = query.lower()
 
-    # Commands handled locally
     local_commands = [
         "google",
         "youtube",
@@ -16,7 +16,7 @@ def process_query(query):
         "visual studio",
         "explorer",
         "time",
-        "date"
+        "date",
     ]
 
     for command in local_commands:
@@ -24,9 +24,7 @@ def process_query(query):
         if command in query:
 
             process_command(query)
-
             return
 
-    # Everything else goes to AI
-
-    print("Routing to AI...")
+    # Anything else goes to AI
+    ask_ai(query)
