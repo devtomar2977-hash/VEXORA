@@ -42,4 +42,6 @@ while True:
             speak("Goodbye Dev.")
             break
 
-        process_command(query)
+        from modules.brain import process_query
+
+        process_query(query)
