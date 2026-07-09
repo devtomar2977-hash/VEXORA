@@ -2,8 +2,9 @@ import asyncio
 import edge_tts
 from playsound import playsound
 import os
+from config import VOICE
 
-VOICE = "en-US-GuyNeural"
+VOICE = "en-US-JennyNeural"
 
 async def generate_voice(text):
     communicate = edge_tts.Communicate(text, VOICE)
