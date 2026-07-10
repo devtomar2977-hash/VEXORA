@@ -1,5 +1,6 @@
 from modules.commands import process_command
 from modules.ai import ask_ai
+from modules.speak import speak
 
 
 def process_query(query):
@@ -26,5 +27,10 @@ def process_query(query):
             process_command(query)
             return
 
-    # Anything else goes to AI
-    ask_ai(query)
+    print("Thinking...")
+
+    answer = ask_ai(query)
+
+    print(answer)
+
+    speak(answer)

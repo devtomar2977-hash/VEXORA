@@ -46,7 +46,7 @@ while True:
             awake = False
 
         elif "exit" in query:
-            print("DEBUG: Sleep command detected")
+            
             speak("Goodbye Dev.")
             break
 
